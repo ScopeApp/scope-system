@@ -16,7 +16,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from backend.views import get_all_students
+from backend.views import check_status # 👈 ייבוא הפונקציה
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/status/', check_status), # 👈 הוספת נתיב חדש לבדיקה
+    path('api/students/', get_all_students),
 ]
