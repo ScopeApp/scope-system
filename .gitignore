@@ -1,0 +1,18 @@
+# Python Environment
+.venv/
+venv/
+__pycache__/
+*.pyc
+
+# IDE Files (PyCharm)
+.idea/
+*.iml
+*~
+
+# Security and Database
+# שינויים מקומיים שאת לא רוצה לדחוף:
+db.sqlite3
+.env
+
+# קבצי מערכת
+.DS_Store
