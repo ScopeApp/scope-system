@@ -21,6 +21,6 @@ from backend.views import check_status # 👈 ייבוא הפונקציה
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/status/', check_status), # 👈 הוספת נתיב חדש לבדיקה
+    path('api/status/', check_status),
     path('api/students/', get_all_students),
 ]
