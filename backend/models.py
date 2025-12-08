@@ -1,17 +1,24 @@
-# This is an auto-generated Django model module.
-# You'll have to do the following manually to clean this up:
-#   * Rearrange models' order
-#   * Make sure each model has one field with primary_key=True
-#   * Make sure each ForeignKey and OneToOneField has `on_delete` set to the desired behavior
-#   * Remove `managed = False` lines if you wish to allow Django to create, modify, and delete the table
-# Feel free to rename the models, but don't rename db_table values or field names.
 from django.db import models
 from django.contrib.auth.models import User;
+
+class UserProfile(models.Model):
+    user = models.OneToOneField(
+        User,
+        on_delete=models.CASCADE,
+        db_column='userid',
+        primary_key=True
+    )
+    tz = models.CharField(unique=True, max_length=10)
+
+    class Meta:
+        managed = False
+        db_table = 'users'
 
 class Assignments(models.Model):
     assignmentid = models.AutoField(primary_key=True)
     studentid = models.ForeignKey('Students', models.CASCADE, db_column='studentid')
-    teacherid = models.ForeignKey(User, models.CASCADE, db_column='teacherid')
+    # קישור ישיר ל-User במקום ל-UserProfile
+    teacher = models.ForeignKey(User, models.CASCADE, db_column='teacherid')
     subjectid = models.ForeignKey('Subjects', models.CASCADE, db_column='subjectid')
 
     class Meta:
@@ -22,7 +29,8 @@ class Attachments(models.Model):
     attachmentid = models.AutoField(primary_key=True)
     attachedtotype = models.CharField(max_length=20)
     attachedtoid = models.IntegerField()
-    reporterid = models.ForeignKey(User, models.CASCADE, db_column='reporterid')
+    # קישור ישיר ל-User במקום ל-UserProfile
+    reporter = models.ForeignKey(User, models.CASCADE, db_column='reporterid')
     filepath = models.CharField(max_length=255)
     uploaddate = models.DateTimeField()
     relevantdate = models.DateField()
@@ -43,7 +51,8 @@ class Classes(models.Model):
 class Progressupdates(models.Model):
     updateid = models.AutoField(primary_key=True)
     assignmentid = models.ForeignKey(Assignments,models.CASCADE, db_column='assignmentid')
-    reporterid = models.ForeignKey(User, models.CASCADE, db_column='reporterid')
+    # קישור ישיר ל-User במקום ל-UserProfile
+    reporter = models.ForeignKey(User, models.CASCADE, db_column='reporterid')
     reportdate = models.DateField()
     descriptiveupdate = models.TextField()
 
@@ -80,14 +89,3 @@ class Subjects(models.Model):
     class Meta:
         managed = False
         db_table = 'subjects'
-
-
-class UserProfile(models.Model):
-    userid=models.AutoField(primary_key=True)
-    user = models.OneToOneField(User, on_delete=models.CASCADE, unique=True, null=True, blank=True)
-    tz = models.CharField(unique=True, max_length=10)
-    userrole = models.CharField(max_length=20)
-
-    class Meta:
-        managed = False
-        db_table = 'users'
