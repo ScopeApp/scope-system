@@ -16,11 +16,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from backend.views import get_all_students
-from backend.views import check_status # 👈 ייבוא הפונקציה
+from django.urls import path, include
+from backend.students.views import get_all_students
+from backend.students.views import check_status # 👈 ייבוא הפונקציה
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/status/', check_status),
-    path('api/students/', get_all_students),
+    path('api/auth/', include('core_users.urls')),
+    path('api/data/', include('students.urls')),
+    path('api/interventions', include('interventions.urls')),
 ]

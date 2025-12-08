@@ -10,7 +10,7 @@ django.setup()
 
 from django.db import transaction
 from django.contrib.auth.models import User
-from backend.models import UserProfile
+from backend.core_users.models import UserProfile
 
 
 def migrate_users():
