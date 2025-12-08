@@ -1,23 +1,26 @@
 import os
-import django
-from django.contrib.auth.models import User
-from django.db import transaction
+import sys
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(BASE_DIR)
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'scope_system.settings')
+import django
+
 django.setup()
 
+from django.db import transaction
+from django.contrib.auth.models import User
 from backend.models import UserProfile
 
 
 def migrate_users():
 
-    profiles_to_migrate = UserProfile.objects.filter(auth_user__isnull=True)
+    profiles_to_migrate = UserProfile.objects.filter(user__isnull=True)
 
     print(f"--- Found {profiles_to_migrate.count()} profiles to migrate... ---")
 
     with transaction.atomic():
         for profile in profiles_to_migrate:
-
             username = profile.tz
 
             try:
@@ -27,12 +30,16 @@ def migrate_users():
                     password='FocalPassword2025'
                 )
 
-
             except Exception as e:
+                if 'already exists' in str(e) or 'duplicate key' in str(e):
+                    print(f"SKIP: User with username {username} already exists.")
+                    continue
+
                 print(f"Error creating user {username}: {e}")
                 continue
 
-            profile.auth_user = user
+
+            profile.user = user
             profile.save()
 
             print(
