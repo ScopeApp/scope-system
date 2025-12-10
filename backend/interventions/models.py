@@ -1,13 +1,13 @@
 from django.db import models
 from django.contrib.auth.models import User;
-from backend.students.models import Students, Subjects
+"""from backend.students.models import Students, Subjects"""
 
 class Assignments(models.Model):
     assignmentid = models.AutoField(primary_key=True)
-    studentid = models.ForeignKey(Students, models.CASCADE, db_column='studentid')
+    studentid = models.ForeignKey('students.Students', models.CASCADE, db_column='studentid')
     # קישור ישיר ל-User במקום ל-UserProfile
     teacher = models.ForeignKey(User, models.CASCADE, db_column='teacherid')
-    subjectid = models.ForeignKey(Subjects, models.CASCADE, db_column='subjectid')
+    subjectid = models.ForeignKey('students.Subjects', models.CASCADE, db_column='subjectid')
 
     class Meta:
         managed = False

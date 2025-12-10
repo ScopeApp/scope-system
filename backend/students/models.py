@@ -1,4 +1,14 @@
 from django.db import models
+
+class Classes(models.Model):
+    classid = models.AutoField(primary_key=True)
+    classname = models.CharField(max_length=50)
+
+    class Meta:
+        managed = False
+        db_table = 'classes'
+
+
 class Students(models.Model):
     studentid = models.AutoField(primary_key=True)
     studenttz = models.CharField(unique=True, max_length=10)
@@ -29,10 +39,3 @@ class Subjects(models.Model):
         db_table = 'subjects'
 
 
-class Classes(models.Model):
-    classid = models.AutoField(primary_key=True)
-    classname = models.CharField(max_length=50)
-
-    class Meta:
-        managed = False
-        db_table = 'classes'

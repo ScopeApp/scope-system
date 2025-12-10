@@ -1,10 +1,7 @@
-# backend/interventions/urls.py
 from django.urls import path
-from . import views
 
+# יש להגדיר את המשתנה הזה כרשימה ריקה אם אין נתיבים כרגע.
 urlpatterns = [
-    # נתיב להוספת דיווח תקופתי (מורה/רכז)
-    path('report/add/', views.add_progress_update, name='add_update'),
-    # נתיב לעדכון הסטטוס הכולל (מורה/רכז)
-    path('status/update/', views.update_student_status, name='update_status'),
+    # path('login/', views.user_login, name='login'),
+    # כאן יתווספו בעתיד הנתיבים הקשורים לאימות משתמשים (כניסה, יציאה, הרשמה).
 ]
