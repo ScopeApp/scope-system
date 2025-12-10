@@ -1,7 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.http import JsonResponse
-from .models import Students  # 👈 ייבוא המודל Students
 
 def check_status(request):
     # מחזירה תגובת טקסט פשוטה לבדיקה
@@ -11,7 +10,7 @@ def get_all_students(request):
     """
     קורא את כל הסטודנטים מטבלת ה-DB ומחזיר JSON.
     """
-
+    from .models import Students
     try:
         # קריאת כל האובייקטים של Students (מקביל ל-SELECT * FROM Students)
         students_data = Students.objects.all()
