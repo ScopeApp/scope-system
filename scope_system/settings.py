@@ -28,11 +28,29 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'rest_framework',
+    'drf_spectacular',
+
     'backend.core_users',
     'backend.students',
     'backend.interventions',
     'backend.reports',
 ]
+
+# הגדרות עבור ה-API וה-Swagger
+REST_FRAMEWORK = {
+    # הגדרת Spectacular כמייצר ה-Schema של ה-API
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+}
+
+# הגדרות התיעוד שיופיעו ב-Swagger
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'SCOPE - API Documentation',
+    'DESCRIPTION': 'מערכת לסקירה רוחבית וזיהוי סטטוס התערבות לתלמידים',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
