@@ -92,7 +92,7 @@ DATABASES = {
         'USER': 'postgres',       # המשתמש שהוגדר ב-Docker Compose
         'PASSWORD': 'SCOPE123', # הסיסמה שהוגדרה ב-Docker Compose
         'HOST': 'localhost',                 # שם ה-Service ב-Docker Compose
-        'PORT': '5432',
+        'PORT': '5433',
     }
 }
 

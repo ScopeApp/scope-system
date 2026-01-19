@@ -32,7 +32,6 @@ class Attachments(models.Model):
 class Progressupdates(models.Model):
     updateid = models.AutoField(primary_key=True)
     assignmentid = models.ForeignKey(Assignments,models.CASCADE, db_column='assignmentid')
-    # קישור ישיר ל-User במקום ל-UserProfile
     reporter = models.ForeignKey(User, models.CASCADE, db_column='reporterid')
     reportdate = models.DateField()
     descriptiveupdate = models.TextField()
