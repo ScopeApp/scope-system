@@ -5,9 +5,9 @@ from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, Spec
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/auth/', include('backend.core_users.urls')),
-    path('api/data/', include('backend.students.urls')),
-    path('api/interventions/', include('backend.interventions.urls')),
+    path('api/auth/', include('core_users.urls')),
+    path('api/data/', include('students.urls')),
+    path('api/interventions/', include('interventions.urls')),
 
 
 # נתיבי Swagger המקצועיים

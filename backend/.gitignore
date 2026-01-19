@@ -1,0 +1,30 @@
+# Python Environment
+.venv/
+venv/
+__pycache__/
+*.pyc
+
+# IDE Files (PyCharm)
+../.idea/
+*.iml
+
+# Security and Database (שינויים מקומיים שאת לא רוצה לדחוף)
+db.sqlite3
+.env
+settings_local.py # אם בחרתן להפריד הגדרות ל local_settings.py
+
+# קבצי מערכת/עריכה
+.DS_Store
+*~
+*.bak
+*.swp
+
+# ניהול תלויות
+eggs/
+*.egg-info
+dist/
+build/
+
+# קבצים הנוצרים על ידי השרת (לא לכלול אם אתן שומרות תמונות בתוך media)
+/static/
+/media/
