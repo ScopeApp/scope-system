@@ -9,5 +9,7 @@ urlpatterns = [
     # # נתיב לקבלת כל הסטודנטים (למשל: /students/all/)
     # path('all/', views.get_all_students, name='get_all_students'),
     path('distribution/', StudentDistributionView.as_view(), name='student-distribution'),
+    path('stats/', views.StudentStatusStatsView.as_view(), name='student-stats'),
+
 
 ]
