@@ -35,45 +35,36 @@
 #         # אם יש שגיאה (כמו שגיאת DB), נחזיר הודעת שגיאה ברורה
 #         return JsonResponse({'error': str(e)}, status=500)
 
-
-# backend/students/views.py
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from rest_framework import status
-from students.services import get_students_count_by_class
+from .services import get_students_count_by_class
 from .serializers import ClassDistributionSerializer
 from drf_spectacular.utils import extend_schema
-
-
-class StudentDistributionView(APIView):
-    @extend_schema(responses=ClassDistributionSerializer(many=True))
-    def get(self, request):
-        # 1. שליפת הנתונים מהשירות
-        data = get_students_count_by_class()
-
-        # 2. המרה ל-JSON (many=True כי זו רשימה של אובייקטים)
-        serializer = ClassDistributionSerializer(data, many=True)
-
-        # 3. שליחת תשובה מסודרת
-
-from django.shortcuts import render
-from django.http import HttpResponse
-from django.http import JsonResponse
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from .services import get_student_status_statistics
 from .serializers import StatusStatisticsSerializer
+from .services import get_all_students_report
+from .serializers import StudentReportSerializer
+
+
+class StudentDistributionView(APIView):
+    @extend_schema(responses=ClassDistributionSerializer(many=True))
+    def get(self, request):
+        data = get_students_count_by_class()
+        serializer = ClassDistributionSerializer(data, many=True)
 
 
 
 class StudentStatusStatsView(APIView):
     def get(self, request):
-        # קריאה ל-Service
         stats_data = get_student_status_statistics()
-
-        # המרה ל-JSON באמצעות הסריאליזר
         serializer = StatusStatisticsSerializer(stats_data, many=True)
-
-        # החזרת התשובה
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+
+class StudentReportView(APIView):
+    def get(self, request):
+        students = get_all_students_report()
+        serializer = StudentReportSerializer(students, many=True)
+        return Response(serializer.data)

@@ -6,13 +6,9 @@ from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, Spec
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/auth/', include('core_users.urls')),
-    path('api/data/', include('students.urls')),
+   # path('api/data/', include('students.urls')),
     path('api/interventions/', include('interventions.urls')),
-
-     path('api/data/students/', include('backend.students.urls')),
-# נתיבי Swagger המקצועיים
-
+     path('api/data/students/', include('students.urls')),
     path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
-    # הכתובת הזו תפתח לך את ממשק ה-Swagger בדפדפן
     path('api/docs/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
 ]
